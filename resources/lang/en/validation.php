@@ -187,8 +187,8 @@ return [
     */
 
     'attributes' => [
-        'title'=>'タイトル',
-        'body'=>'本文',
+        'post.title'=>'タイトル',
+        'post.body'=>'本文',
     ],
 
 ];
