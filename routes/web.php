@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FollowController;
@@ -20,6 +21,12 @@ Route::controller(PostController::class)->middleware(['auth'])->group(function()
     Route::delete('/posts/{post}/delete', 'delete')->name('delete');
     Route::get('/posts/{post}/edit', 'edit')->name('edit');
 });
+
+Route::get('/users/{user}', [UserController::class, 'userProfile']);
+
+
+Route::get('/users/{user}/follow', [FollowController::class, 'follow']);
+Route::delete('/users/{user}/unfollow', [FollowController::class, 'unfollow']);
 
 
 
