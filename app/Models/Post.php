@@ -15,10 +15,25 @@ class Post extends Model
     {
         return $this->orderBy('updated_at','DESC')->paginate($limit_count);
     }
+    /*
+    public function getUserPosts()
+    {
+        return $this->orderBy('updated_at','DESC')->get();
+    }
     
+    public function getTagPost()
+    {
+        return $this->orderBy('updated_at', 'DESC')->get();
+    }
+    */
     public function user()
     {
-    return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
+    }
+    
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);  
     }
     
     protected $fillable = [

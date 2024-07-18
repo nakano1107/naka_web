@@ -13,12 +13,6 @@
                                     @method('DELETE')
                                     <button type="submit">フォローを外す</button> 
                                 </form>
-                                
-                                {{-- <a>で書いた場合
-                                The GET method is not supported for route users/2/unfollow.
-                                Supported methods: DELETE.
-                                と言われるんだけどどうすればいい？
-                                <a href="/users/{{ $user->id }}/unfollow">フォローを外す</a>--}}
                             </div>
                         @else
                             <div class="follow">
@@ -29,10 +23,19 @@
                 <p>【{{ $user->name }}の投稿】</p>
             </div>
             <div class='posts'>
-            @foreach ($user->posts as $post)
-                <a href="/posts/{{ $post->id }}"><h2 class='title'>タイトル：{{ $post->title }}</h2></a>
-                <p>本文：{{ $post->body }}</p>
-            @endforeach
+                @foreach ($posts as $post)
+                    <div class='post m-3 p-3 bg-gray-400'>
+                        <a href="/posts/{{ $post->id }}"><h2 class='title'>タイトル：{{ $post->title }}</h2></a>
+                        <p>本文：{{ $post->body }}</p>
+                        <div class="tag">
+                            <p>
+                                @foreach ($post->tags as $tag)
+                                <a href="/tags/{{ $tag->id }}"><span>#{{ $tag->name }}</span></a>
+                                @endforeach
+                            </p>
+                        </div>
+                    </div>
+                @endforeach
             <a href="/">[全体投稿一覧へ]</a>
             </div>
         </body>
