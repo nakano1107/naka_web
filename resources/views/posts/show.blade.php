@@ -2,11 +2,18 @@
 <html lang="ja">
     <x-app-layout>
         <body>
-            <h1 class="title">タイトル：{{ $post->title }}</h1>
-            <a href="/users/{{ $post->user_id }}"><h2 class='title'>ユーザー：{{ $post->user->name }}</h2></a>
-            <div class="content">
-                <div class="content__post">
+            <div class='post m-3 p-3 bg-gray-400'>
+                <h1 class="title">タイトル：{{ $post->title }}</h1>
+                <a href="/users/{{ $post->user_id }}"><h3 class='user'>ユーザー：{{ $post->user->name }}</h3></a>
+                <div class="content">
                     <p>内容：{{ $post->body }}</p>    
+                </div>
+                <div class="tag">
+                    <p>
+                        @foreach ($tags as $tag)
+                            <a href="/tags/{{ $tag->id }}"><span>#{{ $tag->name }}</span></a>
+                        @endforeach
+                    </p>
                 </div>
             </div>
             <div class="footer">
@@ -26,7 +33,7 @@
                                 
                                 if(confirm('削除すると復元できません。\n本当に削除しますか？')){
                                     document.getElementById(`form_${id}`).submit();
-                                }                
+                                   }                
                             }
                         </script>
                     </div> 
