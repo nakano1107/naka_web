@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 
 class PostController extends Controller
@@ -66,6 +67,21 @@ class PostController extends Controller
     {
         $post->delete();
         return redirect('/');
+    }
+    
+    public function search(Request $request, Post $post)
+    {
+        $keyword = $request['keyword'];
+        if(!empty($keyword)) {
+            $posts = $post->search($keyword);
+        }else{
+            dd($posts->links());
+            $posts = $post->getPaginateBylimit();
+        }
+        return view('posts.index')->with([
+            'posts'=>$posts,
+            'keyword'=>$keyword,
+        ]);
     }
 }
 

@@ -12,7 +12,7 @@
                     </div>
                 @endforeach
             </div>
-            <p>ログインユーザー:{{ Auth::user()->name }}</p>
+            <p>ログインユーザー：{{ Auth::user()->name }}</p>
         </body>
     </x-app-layout>
 </html>
