@@ -3,6 +3,16 @@
     <x-app-layout>
         <body>
             <a href="/posts/create">[投稿作成]</a>
+            <div class='search'>
+              <form action="/posts/search" method="GET">
+                @csrf
+                <input type="text" name="keyword" value="{{ old('keyword') }}"/>
+                <input type="submit" value="検索"/>
+              </form>
+            @if (isset($keyword))
+                <h2>検索ワード：{{ $keyword }}</h2>
+            @endif
+            </div>
             <div class='posts'>
                 @foreach ($posts as $post)
                     <div class='post m-3 p-3 bg-gray-400'>
@@ -18,10 +28,10 @@
                 @endforeach
             </div>
             <div class='paginate'>
-                {{ $posts->links() }}
+                {{ $posts->appends(request()->query())->links() }} 
             </div>
 
-            <p>ログインユーザー:{{ Auth::user()->name }}</p>
+            <p>ログインユーザー：{{ Auth::user()->name }}</p>
         </body>
     </x-app-layout>
-</html>$
+</html>

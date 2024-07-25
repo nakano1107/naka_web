@@ -40,6 +40,7 @@
                 @endif
                 <a href="/">[全体投稿一覧へ]</a>
             </div>
+            <p>ログインユーザー：{{ Auth::user()->name }}</p>
         </body>
     </x-app-layout>
 </html>

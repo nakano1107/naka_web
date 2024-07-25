@@ -15,17 +15,12 @@ class Post extends Model
     {
         return $this->orderBy('updated_at','DESC')->paginate($limit_count);
     }
-    /*
-    public function getUserPosts()
+    
+    public function search(string $keyword, int $limit_count=5)
     {
-        return $this->orderBy('updated_at','DESC')->get();
+        return $this->where('title', 'LIKE', "%{$keyword}%")->orWhere('body', 'LIKE', "%{$keyword}%")->paginate($limit_count);
     }
     
-    public function getTagPost()
-    {
-        return $this->orderBy('updated_at', 'DESC')->get();
-    }
-    */
     public function user()
     {
         return $this->belongsTo(User::class);
