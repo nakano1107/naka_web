@@ -8,22 +8,26 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('send_user_id')->constrained('users');
-            $table->foreignId('recieve_user_id')->constrained('users');
-            $table->string('body', 200);
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('chat_id')->nullable()->references('id')->on('chats')->onDelete('cascade');
+            $table->string('body');
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('messages');
     }

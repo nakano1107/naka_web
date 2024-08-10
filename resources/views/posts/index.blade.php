@@ -24,12 +24,15 @@
                             <a href="/tags/{{ $tag->id }}">#{{ $tag->name }}</a>
                         @endforeach
                         </p>
+                        <a href="/chat/{{ $post->user->id }}">{{ $post->user->name }}とチャットする</a>
                     </div>
                 @endforeach
             </div>
             <div class='paginate'>
                 {{ $posts->appends(request()->query())->links() }} 
             </div>
+            
+            
 
             <p>ログインユーザー：{{ Auth::user()->name }}</p>
         </body>

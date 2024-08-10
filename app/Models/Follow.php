@@ -14,13 +14,13 @@ class Follow extends Model
         //フォローしているユーザー
     public function following()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(User::class, 'follow_id', 'id');
     }
 
     //フォローされているユーザー
     public function followed()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(User::class, 'followee_id', 'id');
     }
     
     //ログインユーザーは、対象ユーザーをフォローしているか？
